@@ -3,7 +3,9 @@ const Login = () => {
 
     return (
         <div>
-            LOGIN
+            <form>
+                
+            </form>
         </div>
     )
 }
