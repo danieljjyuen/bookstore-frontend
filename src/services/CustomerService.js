@@ -7,7 +7,6 @@ const logIn = () => {
 }
 
 const createCustomer = async (username, name, password) => {
-    console.log("inside service : ", username, " " , name, " ", password);
     const response = await axios.post(`${baseUrl}/api/customers/create`,
     {
      "username":username,

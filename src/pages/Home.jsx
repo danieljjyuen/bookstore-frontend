@@ -1,8 +1,71 @@
-const Home = () => {
+import Library from "../components/Library"
+import { useState } from "react";
+import BookQueryService from "../services/BookQueryService";
 
+const Home = () => {
+    const [title, setTitle] = useState("");
+    const [author, setAuthor] = useState("");
+    const [books, setBooks] = useState([]);
+    const [query, setQuery] = useState("");
+
+    //handle search depending on whether query is by title, author or both
+    const handleSearch = async (event) => {
+        event.preventDefault();
+        if(title && author) {
+            const response = await BookQueryService.searchByTitleAuthor(title, author);
+            setBooks(response);
+        }else if(title) {
+            const response = await BookQueryService.searchByTitle(title);
+            setBooks(response);
+        }else if(author){
+            const response = await BookQueryService.searchByAuthor(author);
+            setBooks(response);
+        }
+
+        setTitle("");
+        setAuthor("");
+    }
+
+    const handleQuery = async (event) => {
+        event.preventDefault();
+        const response = await BookQueryService.loadMoreFromApi(query);
+        setQuery("");
+        window.alert(response);
+    }
     return (
         <div>
-            HOME
+            <form onSubmit={handleSearch}>
+                <div>
+                    Title: <input
+                    name="title"
+                    type="text"
+                    id="title"
+                    value={title}
+                    onChange={(event) => setTitle(event.target.value)} />
+                </div>
+                <div>
+                    Author: <input 
+                    name="author"
+                    type="text"
+                    id="author"
+                    value={author}
+                    onChange={(event) => setAuthor(event.target.value)} />
+                </div>
+                <div>
+                    <button type="submit">Search</button>
+                </div>
+            </form>
+            <form onSubmit={handleQuery}>
+                Query More Results
+                <input 
+                name="query"
+                type="text"
+                id="query"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}/>
+                <button type="submit">search</button>
+            </form>
+            <Library books={books}/>
         </div>
     )
 }
