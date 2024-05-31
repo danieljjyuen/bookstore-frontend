@@ -19,10 +19,11 @@ const CreateCustomer = () => {
         } catch(error) {
             setMessage("Try Different Username");
             console.log(error.message);
+        } finally {
+            setName("");
+            setUsername("");
+            setPassword("");
         }
-        setName("");
-        setUsername("");
-        setPassword("");
     }
 
     return (

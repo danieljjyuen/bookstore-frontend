@@ -11,26 +11,35 @@ const Home = () => {
     //handle search depending on whether query is by title, author or both
     const handleSearch = async (event) => {
         event.preventDefault();
-        if(title && author) {
-            const response = await BookQueryService.searchByTitleAuthor(title, author);
-            setBooks(response);
-        }else if(title) {
-            const response = await BookQueryService.searchByTitle(title);
-            setBooks(response);
-        }else if(author){
-            const response = await BookQueryService.searchByAuthor(author);
-            setBooks(response);
+        try {
+            if(title && author) {
+                const response = await BookQueryService.searchByTitleAuthor(title, author);
+                setBooks(response);
+            }else if(title) {
+                const response = await BookQueryService.searchByTitle(title);
+                setBooks(response);
+            }else if(author){
+                const response = await BookQueryService.searchByAuthor(author);
+                setBooks(response);
+            }
+        } catch (error) {
+            console.log(error.message);
+        } finally {
+            setTitle("");
+            setAuthor("");
         }
-
-        setTitle("");
-        setAuthor("");
     }
 
     const handleQuery = async (event) => {
         event.preventDefault();
-        const response = await BookQueryService.loadMoreFromApi(query);
-        setQuery("");
-        window.alert(response);
+        try {
+            const response = await BookQueryService.loadMoreFromApi(query);
+            setQuery("");
+            window.alert(response);
+        } catch (error) {
+            console.log(error.message);
+        }
+
     }
     return (
         <div>
