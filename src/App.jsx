@@ -6,10 +6,12 @@ import CreateCustomer from "./pages/CreateCustomer";
 import Login from "./pages/Login";
 import DefaultNavBar from "./components/menu/DefaultNavBar";
 import LoggedInNavBar from "./components/menu/LoggedInNavBar";
+import { useSelector } from 'react-redux';
+import MyLibrary from "./pages/MyLibrary";
 
 const App = () => {
-  //temporary user assignment
-  const user = null;
+  const authenticated = useSelector(state => state.customer.isAuthenticated);
+  console.log("authenticated : ", authenticated);
   useEffect(() => {
     // const baseUrl = import.meta.env.VITE_REACT_APP_API_URL;
     // console.log('testing');
@@ -26,7 +28,7 @@ const App = () => {
 
   return (
     <div>
-      {user==null? 
+      { authenticated == false? 
         <DefaultNavBar />
         : <LoggedInNavBar />}
     
@@ -34,6 +36,7 @@ const App = () => {
       <Route path="/" element={<Home/>} />
       <Route path="/login" element={<Login />} />
       <Route path="/create" element={<CreateCustomer />} />
+      <Route path="/mylibrary" element={<MyLibrary />} />
     </Routes>
     </div>
   )

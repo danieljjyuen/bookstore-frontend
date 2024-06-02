@@ -31,7 +31,7 @@ const searchByAuthor = async (author) => {
 }
 
     const searchByTitleAuthor = async (title, author) => {  
-        try{
+        try {
             const response = await axios.get(`${baseUrl}/api/books/search/title-author?title=${title}&&author=${author}`)
 
             return response.data;
@@ -40,6 +40,26 @@ const searchByAuthor = async (author) => {
         }
     }
 
+
+    const searchByCustomerUsername = async () => {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        }
+        console.log(config);
+        try {
+            const response = await axios.get(`${baseUrl}/api/customers/getlibrary`, config);
+            return response.data;
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+//     @GetMapping("/search/customerid")
+//     public ResponseEntity<Set<Book>> findByCustomerId(@RequestParam("id") long id) {
+//         Set<Book> books = bookDBService.findByCustomerId(id);
+//         return ResponseEntity.ok(books);
+//     }
 //     @GetMapping("/search/bookid")
 //     public ResponseEntity<Book> findById(@RequestParam("id") String id) {
 //         Optional<Book> book = bookDBService.findById(id);
@@ -62,15 +82,12 @@ const searchByAuthor = async (author) => {
 //         }
 //     }
 
-//     @GetMapping("/search/customerid")
-//     public ResponseEntity<Set<Book>> findByCustomerId(@RequestParam("id") long id) {
-//         Set<Book> books = bookDBService.findByCustomerId(id);
-//         return ResponseEntity.ok(books);
-//     }
+
 
 export default {
     searchByTitle,
     loadMoreFromApi,
     searchByAuthor,
-    searchByTitleAuthor
+    searchByTitleAuthor,
+    searchByCustomerUsername
 };
