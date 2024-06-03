@@ -8,23 +8,10 @@ import DefaultNavBar from "./components/menu/DefaultNavBar";
 import LoggedInNavBar from "./components/menu/LoggedInNavBar";
 import { useSelector } from 'react-redux';
 import MyLibrary from "./pages/MyLibrary";
+import Logout from "./pages/Logout"
 
 const App = () => {
   const authenticated = useSelector(state => state.customer.isAuthenticated);
-  console.log("authenticated : ", authenticated);
-  useEffect(() => {
-    // const baseUrl = import.meta.env.VITE_REACT_APP_API_URL;
-    // console.log('testing');
-    // console.log(baseUrl);
-    // let response = CustomerService.createCustomer({
-    //   "username" : "from react",
-    //   "password" : "password",
-    //   "name" : "react"
-    // })
-  
-    //console.log(response);
-  },[])
-
 
   return (
     <div>
@@ -37,6 +24,7 @@ const App = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/create" element={<CreateCustomer />} />
       <Route path="/mylibrary" element={<MyLibrary />} />
+      <Route path="/logout" element={<Logout />} />
     </Routes>
     </div>
   )

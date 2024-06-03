@@ -15,7 +15,8 @@ const customerSlice = createSlice({
         },
         logout: (state, action ) => {
             state.isAuthenticated = false,
-            state.name =""            
+            state.name = "",
+            state.myLibrary= []      
         },
         setBooks: (state, action ) => {
             state.myLibrary = action.payload
