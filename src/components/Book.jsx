@@ -1,10 +1,30 @@
+import { useSelector } from "react-redux";
+import CustomerService from "../services/CustomerService";
+import { useDispatch } from "react-redux";
+import { addBook } from '../reducer/customerReducer';
+
 const Book = ({book}) => {
     const {id, title, author} = book;
+    const authenticated = useSelector(state => state.customer.isAuthenticated);
+    const myLibrary = useSelector(state => state.customer.myLibrary);
+    const bookOwned = myLibrary.find(book => book.id === id);
+    const dispatch = useDispatch();
+
+    const handleAdd = async (event) => {
+        event.preventDefault();
+        const response = await CustomerService.addToLibrary(id);
+        dispatch(addBook(book));
+        
+    }
     if(book){
         return (
             <div id={id}>
                 Title: {title}
                 Author: {author}
+                {
+                    authenticated && !bookOwned &&
+                    <button onClick={handleAdd}>Add</button>
+                }
             </div>
         )
     }

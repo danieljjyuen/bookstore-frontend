@@ -13,7 +13,7 @@ const loadMoreFromApi = async (query) => {
 const searchByTitle = async (title) => {
     try{
         const response =await axios.get(`${baseUrl}/api/books/search/title?title=${title}`);
-        
+        console.log(response);
         return response.data;
     } catch(error) {
         console.log(error.message);

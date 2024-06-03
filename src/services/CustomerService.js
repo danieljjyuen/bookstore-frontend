@@ -23,7 +23,22 @@ const createCustomer = async (username, name, password) => {
     return response.data;
 }
 
-const addToLibrary = () => {
+const addToLibrary = async (bookId) => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    };
+    try{
+        const response = await axios.post(`${baseUrl}/api/customers/addlibrary?bookid=${bookId}`,
+            {},
+            config
+        );
+        console.log("addtolibrary response");
+        console.log(response);
+    } catch(error) {
+        console.error(error);
+    }
 
 }
 
@@ -31,5 +46,4 @@ export default {
     logIn,
     createCustomer,
     addToLibrary
-
 }

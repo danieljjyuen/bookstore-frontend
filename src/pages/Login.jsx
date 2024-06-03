@@ -2,7 +2,7 @@ import { useState } from 'react'
 import CustomerService from '../services/CustomerService'
 import Notification from '../components/Notification'
 import { useDispatch } from 'react-redux'
-import { loginSuccess } from '../reducer/customerReducer'
+import { fetchBooks, loginSuccess } from '../reducer/customerReducer'
 import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
@@ -14,6 +14,10 @@ const Login = () => {
 
     const loginHandler = async (event) => {
         event.preventDefault();
+        if(!username || !password) {
+            setMessage("Username and password cannot be empty");
+            return;
+        }
         try {
             const response = await CustomerService.logIn(username, password);
             console.log("login handler : ", response.token);
@@ -22,7 +26,7 @@ const Login = () => {
             window.localStorage.setItem('token', response.token);
         
             dispatch(loginSuccess(response.name));
-            
+            dispatch(fetchBooks());
             //redirect to homepage
             navigate("/");
         } catch(error) {

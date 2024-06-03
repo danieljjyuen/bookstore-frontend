@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 const MyLibrary = () => {
     const customerName = useSelector(state => state.customer.name);
-    const [books, setBooks] = useState([]);
+    const books = useSelector(state => state.customer.myLibrary);
     const authenticated = useSelector(state => state.customer.isAuthenticated)
     const navigate = useNavigate();
 
@@ -14,24 +14,9 @@ const MyLibrary = () => {
         if(!authenticated){
             navigate("/");
         }
-        const fetchBooks = async () => {
-            try {
-                const response = await BookQueryService.searchByCustomerUsername();
-                if (response) {
-                    setBooks(response);
-                }
-            } catch (error) {
-                console.error("Error fetching books:", error);
-            }
-        };
         
-        fetchBooks();
     },[])
     
-
-    console.log(books);
-
-
     if(books.length > 0){
         return (
             <div>
