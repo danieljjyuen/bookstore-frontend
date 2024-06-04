@@ -50,6 +50,7 @@ const searchByAuthor = async (author) => {
         console.log(config);
         try {
             const response = await axios.get(`${baseUrl}/api/customers/getlibrary`, config);
+            console.log(response);
             return response.data;
         } catch (error) {
             console.log(error.message);

@@ -2,14 +2,17 @@ import { useSelector } from "react-redux";
 import CustomerService from "../services/CustomerService";
 import { useDispatch } from "react-redux";
 import { addBook } from '../reducer/customerReducer';
+import BookInfo from "../Modal/BookInfo";
 
 const Book = ({book}) => {
-    const {id, title, author} = book;
+    //deconstruct book variables
+    const {id, title, authors, smallThumbnail, subtitle, categories} = book;
     const authenticated = useSelector(state => state.customer.isAuthenticated);
     const myLibrary = useSelector(state => state.customer.myLibrary);
     const bookOwned = myLibrary.find(book => book.id === id);
     const dispatch = useDispatch();
 
+    console.log(book);
     const handleAdd = async (event) => {
         event.preventDefault();
         const response = await CustomerService.addToLibrary(id);
@@ -18,19 +21,27 @@ const Book = ({book}) => {
     }
     if(book){
         return (
-            <div id={id}>
-                Title: {title}
-                Author: {author}
-                {
-                    authenticated && !bookOwned &&
-                    <button onClick={handleAdd}>Add</button>
-                }
-            </div>
+            <tr key={id} id={id}>
+                <td><img src={smallThumbnail} /></td>
+                <td>{title}</td>
+                <td>{subtitle}</td>
+                <td>{authors}</td>
+                <td>{categories}</td>
+                <td><BookInfo book={book} /></td>
+                <td>
+                    {authenticated && !bookOwned &&
+                    <button onClick={handleAdd}>Add</button>}
+                </td>
+
+            </tr>
+
         )
     }
 }
 
 export default Book;
+
+
 
 // description
 // : 
