@@ -8,7 +8,6 @@ const Library = ({books}) => {
                     <tr>
                         <th>Cover</th>
                         <th>Title</th>
-                        <th>Subtitle</th>
                         <th>Authors</th>
                         <th>Categories</th>
                         <th>More Info</th>
@@ -28,25 +27,3 @@ const Library = ({books}) => {
 }
 
 export default Library;
-
-// "pk": 15,
-//     "id": "",
-//     "title": "",
-//     "subtitle": null,
-//     "publisher": "HarperCollins",
-//     "publisherDate": "2021-08-19",
-//     "description": "",
-//     "pageCount": 132,
-//     "smallThumbnail": "",
-//     "thumbnail": "",
-//     "listPriceAmount": 3.49,
-//     "listPriceCurrency": "USD",
-//     "retailPriceAmount": 3.49,
-//     "retailPriceCurrency": "USD",
-//     "buyLink": "",
-//     "averageRating": 0,
-//     "ratingsCount": 0,
-//     "language": "en",
-//     "kind": "books#volume",
-//     "authors": "Charlotte McLaren",
-//     "categories": "Biography & Autobiography

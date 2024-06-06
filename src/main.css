@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.app {
+    @apply bg-beige min-h-screen flex flex-col items-center justify-center p-4;
+}
+
+.nav-bar {
+    @apply fixed top-0 left-0 py-3 flex
+}
+
+.link-bar {
+    @apply hover:text-gray-300 px-3
+}
+
+.btn-blue {
+    @apply bg-slateBlue text-white rounded-x1 px-2 py-1 text-sm;
+  }
+
+.input {
+    @apply border border-gray-300 p-1 rounded w-full m-1;
+}

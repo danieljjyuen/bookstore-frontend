@@ -19,7 +19,7 @@ const MyLibrary = () => {
     
     if(books.length > 0){
         return (
-            <div>
+            <div className="max-h-[600px]">
                 Welcome {customerName}
                 <Library books={books}/>
             </div>

@@ -14,7 +14,7 @@ const App = () => {
   const authenticated = useSelector(state => state.customer.isAuthenticated);
 
   return (
-    <div>
+    <div className="app">
       { authenticated == false? 
         <DefaultNavBar />
         : <LoggedInNavBar />}

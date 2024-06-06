@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom';
 
 const DefaultNavBar = () => {
     return(
-        <div>
-        <Link style={{padding:5}} to="/">Home</Link>
-        <Link style={{padding:5}} to="/create">Create Account</Link>
-        <Link style={{padding:5}} to="/login">Login</Link>
+        <div className="nav-bar">
+        <Link className="link-bar" to="/">Home</Link>
+        <Link className="link-bar" to="/create">Create Account</Link>
+        <Link className="link-bar" to="/login">Login</Link>
         </div>
     )
 }

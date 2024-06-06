@@ -53,39 +53,49 @@ const Home = () => {
 
     }
     return (
-        <div>
-            <form onSubmit={handleSearch}>
-                <div>
-                    Title: <input
-                    name="title"
-                    type="text"
-                    id="title"
-                    value={title}
-                    onChange={(event) => setTitle(event.target.value)} />
-                </div>
-                <div>
-                    Author: <input 
-                    name="author"
-                    type="text"
-                    id="author"
-                    value={author}
-                    onChange={(event) => setAuthor(event.target.value)} />
-                </div>
-                <div>
-                    <button type="submit">Search</button>
-                </div>
-            </form>
-            <form onSubmit={handleQuery}>
-                Query More Results
-                <input 
-                name="query"
-                type="text"
-                id="query"
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}/>
-                <button type="submit">search</button>
-            </form>
-            <Library books={books}/>
+        <div className="flex flex-col items-start mt-6 max-h-[600px]">
+            <div className="flex space-x-4 mb-4 w-full justify-around">
+                <form className="mr-4" onSubmit={handleSearch}>
+                    <div className="p-1">
+                        Title: <input
+                        className="input"
+                        name="title"
+                        type="text"
+                        id="title"
+                        value={title}
+                        onChange={(event) => setTitle(event.target.value)} />
+                    </div>
+                    <div className="p-1">
+                        Author: <input 
+                        className="input"
+                        name="author"
+                        type="text"
+                        id="author"
+                        value={author}
+                        onChange={(event) => setAuthor(event.target.value)} />
+                    </div>
+                    <div>
+                        <button className="btn-blue" type="submit">Search</button>
+                    </div>
+                </form>
+                <form className="mr-4 mt-10" onSubmit={handleQuery}>
+                    <div className="p-1">
+                        Query More Results:
+                        <input 
+                        className="input"
+                        name="query"
+                        type="text"
+                        id="query"
+                        value={query}
+                        onChange={(event) => setQuery(event.target.value)}/>
+                    </div>
+                    <div>
+                        <button className="btn-blue" type="submit">search</button>
+                    </div>
+                </form>
+            </div>
+            {books.length>0? <Library books={books}/> : null}
+            
         </div>
     )
 }
