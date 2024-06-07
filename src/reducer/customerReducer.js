@@ -11,7 +11,7 @@ const customerSlice = createSlice({
     reducers: {
         loginSuccess: (state, action ) => {
             state.isAuthenticated = true,
-            state.name = action.payload.name
+            state.name = action.payload
         },
         logout: (state, action ) => {
             state.isAuthenticated = false,

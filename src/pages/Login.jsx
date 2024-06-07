@@ -24,7 +24,7 @@ const Login = () => {
             console.log("login handler : ", response.name);
 
             window.localStorage.setItem('token', response.token);
-        
+            
             dispatch(loginSuccess(response.name));
             dispatch(fetchBooks());
             //redirect to homepage
@@ -39,11 +39,12 @@ const Login = () => {
     }
 
     return (
-        <div>
+        <div className="border-form">
             <Notification message={message} />
             <form onSubmit={loginHandler}>
                 <div>
                     username : <input 
+                            className="input"
                             name="username"
                             value={username}
                             type="text"
@@ -53,6 +54,7 @@ const Login = () => {
                 </div>
                 <div>
                     password : <input 
+                            className="input"
                             name="password"
                             value={password}
                             type="password"
@@ -60,7 +62,7 @@ const Login = () => {
                         />
                 </div>
                 <div>
-                    <button type="submit">Log In</button>
+                    <button className="btn-blue" type="submit">Log In</button>
                 </div>
             </form>
         </div>

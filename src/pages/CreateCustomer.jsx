@@ -11,6 +11,10 @@ const CreateCustomer = () => {
 
     const create = async (event) => {
         event.preventDefault();
+        if(!username || !password || !name) {
+            setMessage("Username, password, name cannot be empty");
+            return;
+        }
         console.log(username, " ", password, " ", name)
         try{
             const response = await CustomerService.createCustomer(username, name, password);
@@ -28,12 +32,13 @@ const CreateCustomer = () => {
 
     return (
     
-        <div>
+        <div className="border-form">
             <Notification message={message} />
             <form onSubmit={create}>
                 <div>
                     username: 
                     <input 
+                        className="input"
                         name="username"
                         type="text"
                         value={username}
@@ -44,6 +49,7 @@ const CreateCustomer = () => {
                 <div>
                     name: 
                     <input 
+                        className="input"
                         name="name"
                         type="text"
                         value={name}
@@ -54,6 +60,7 @@ const CreateCustomer = () => {
                 <div>
                     password:
                     <input 
+                        className="input"
                         name="password"
                         type="password"
                         value={password}
@@ -62,7 +69,7 @@ const CreateCustomer = () => {
                     />
                 </div>
                 <div>
-                    <button type="submit" id="createSubmit">Create</button>
+                    <button className="btn-blue" type="submit" id="createSubmit">Create</button>
                 </div>
                 
             </form>

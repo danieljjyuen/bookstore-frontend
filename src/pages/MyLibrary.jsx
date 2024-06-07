@@ -9,7 +9,7 @@ const MyLibrary = () => {
     const books = useSelector(state => state.customer.myLibrary);
     const authenticated = useSelector(state => state.customer.isAuthenticated)
     const navigate = useNavigate();
-
+    
     useEffect(() => {
         if(!authenticated){
             navigate("/");
@@ -19,10 +19,14 @@ const MyLibrary = () => {
     
     if(books.length > 0){
         return (
-            <div className="max-h-[600px]">
-                Welcome {customerName}
+            <div className="flex flex-col items-start mt-6 max-h-[600px] ">
+                <p className="absolute top-0 right-0 pr-4">Welcome {customerName}</p>
                 <Library books={books}/>
             </div>
+        )
+    }else {
+        return (
+            <div>Add some books first</div>
         )
     }
 }

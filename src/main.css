@@ -21,3 +21,12 @@
 .input {
     @apply border border-gray-300 p-1 rounded w-full m-1;
 }
+
+.border-form {
+    @apply p-4 bg-gray-100 rounded border border-gray-300;
+}
+
+html, body {
+    @apply bg-beige;
+    min-height: 100%;
+  }
