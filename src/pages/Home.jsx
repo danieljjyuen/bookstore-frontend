@@ -1,13 +1,14 @@
 import Library from "../components/Library"
 import { useState } from "react";
 import BookQueryService from "../services/BookQueryService";
+import LoadingOverlay from "../components/LoadingOverlay";
 
 const Home = () => {
     const [title, setTitle] = useState("");
     const [author, setAuthor] = useState("");
     const [books, setBooks] = useState([]);
     const [query, setQuery] = useState("");
-    
+    const [isLoading, setIsLoading] = useState(false);
 
     //handle search depending on whether query is by title, author or both
     const handleSearch = async (event) => {
@@ -44,16 +45,21 @@ const Home = () => {
     const handleQuery = async (event) => {
         event.preventDefault();
         try {
+            //loading overlay
+            setIsLoading(true);
             const response = await BookQueryService.loadMoreFromApi(query);
             setQuery("");
             window.alert(response);
         } catch (error) {
             console.log(error.message);
+        }finally {
+            setIsLoading(false);
         }
 
     }
     return (
         <div className="flex flex-col items-start mt-6 max-h-[600px]">
+            {isLoading && <LoadingOverlay />}
             <div className="flex space-x-4 mb-4 w-full justify-around">
                 <form className="mr-4" onSubmit={handleSearch}>
                     <div className="p-1">
