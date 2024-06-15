@@ -10,36 +10,38 @@ const loadMoreFromApi = async (query) => {
     }
 }
 
-const searchByTitle = async (title) => {
+const searchByTitle = async (title, page, size) => {
     try{
-        const response =await axios.get(`${baseUrl}/api/books/search/title?title=${title}`);
-        console.log(response);
+        // const response =await axios.get(`${baseUrl}/api/books/search/title?title=${title}`);
+        // console.log(response);
+        const response = await axios.get(`${baseUrl}/api/books/unifiedsearch`, { params: { title, page, size } });
+   
         return response.data;
     } catch(error) {
         console.log(error.message);
     }
 }
 
-const searchByAuthor = async (author) => {
+const searchByAuthor = async (author, page, size) => {
     try {
-        const response = await axios.get(`${baseUrl}/api/books/search/author?author=${author}`)
-
+        //const response = await axios.get(`${baseUrl}/api/books/search/author?author=${author}`)
+        const response = await axios.get(`${baseUrl}/api/books/unifiedsearch`, { params: { author, page, size } });
+    
         return response.data;
     } catch(error) {
         console.log(error.message);
     }
 }
 
-    const searchByTitleAuthor = async (title, author) => {  
+    const searchByTitleAuthor = async (title, author, page, size) => {  
         try {
-            const response = await axios.get(`${baseUrl}/api/books/search/title-author?title=${title}&&author=${author}`)
-
+            const response = await axios.get(`${baseUrl}/api/books/unifiedsearch`, { params: { title, author, page, size } });
+    
             return response.data;
         }catch(error){
             console.log(error.message);
         }
     }
-
 
     const searchByCustomerUsername = async () => {
         const config = {
@@ -47,7 +49,7 @@ const searchByAuthor = async (author) => {
                 Authorization: `Bearer ${localStorage.getItem("token")}`
             }
         }
-        console.log(config);
+        //console.log(config);
         try {
             const response = await axios.get(`${baseUrl}/api/customers/getlibrary`, config);
             console.log(response);
@@ -82,8 +84,6 @@ const searchByAuthor = async (author) => {
 //             return ResponseEntity.notFound().build();
 //         }
 //     }
-
-
 
 export default {
     searchByTitle,
